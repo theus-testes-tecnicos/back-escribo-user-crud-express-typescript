@@ -17,30 +17,19 @@ services:
     volumes:
       - escribo:/var/lib/postgresql/data:rw
 
-#   backend:
-#     container_name: backend
-#     build: ./backend
-#     command: bash -c "npm run typeorm migration:run -- -d ./src/data-source.ts && npm run dev"
-#     ports:
-#       - 3001:3001
-#     env_file:
-#       - .env
-#     depends_on:
-#       - database
-#     volumes:
-#       - .:/usr/app
-
-#   frontend:
-#     container_name: frontend
-#     build: ./frontend
-#     ports:
-#       - 3000:3000
-#     stdin_open: true
-#     volumes:
-#       - ./frontend:usr/app
-#     depends_on:
-#       - database
-#       - backend
+  backend:
+    container_name: backend
+    build: ./
+    # command: bash  -c "npm run dev"
+    command: bash -c "npm run typeorm migration:run -- -d ./src/data-source.ts && npm run dev"
+    ports:
+      - 3001:3001
+    env_file:
+      - .env
+    depends_on:
+      - database
+    volumes:
+      - .:/usr/app
 
 volumes:
   escribo:

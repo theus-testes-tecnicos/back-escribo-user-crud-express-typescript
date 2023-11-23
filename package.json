@@ -2,9 +2,10 @@
   "name": "back-escribo-user-crud-express-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "cross-env ts-node-dev --ignore-watch node_modules src/index.ts"
+    "dev": "cross-env ts-node-dev --ignore-watch node_modules src/server.ts",
+    "typeorm": "cross-env typeorm-ts-node-commonjs"
   },
   "keywords": [],
   "author": "",
