@@ -33,7 +33,7 @@ export const isAuthenticatedMiddleware = async (
       throw new AppError(401, "invalid or expired token");
     }
 
-    req.userId = decoded.id;
+    req.userId = decoded.userId;
     next();
   });
 };
