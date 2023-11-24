@@ -1,5 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user";
+import { UserSerializer } from "../../serializers/user.serializer";
 
 export const getUsersService = async (
   currentUrl: string,
@@ -14,7 +15,7 @@ export const getUsersService = async (
 
   const skip = (page - 1) * limit;
 
-  const users = userRepo.find({
+  const users = await userRepo.find({
     skip,
     take: limit,
     order: { createdAt: "desc" },
@@ -29,13 +30,15 @@ export const getUsersService = async (
   const prev =
     page <= 1 ? null : `${currentUrl}?page=${page - 1}&limit=${limit}`;
 
+  const serializedUsers = users.map((user) => new UserSerializer(user));
+
   const response = {
     page,
     count,
     next,
     prev,
     limit,
-    result: users,
+    result: serializedUsers,
   };
 
   return response;
