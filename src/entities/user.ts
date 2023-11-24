@@ -5,10 +5,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
 import { Exclude } from "class-transformer";
 import { v4 as uuid } from "uuid";
 import { Phone } from "./phone";
+import { Session } from "./session";
 
 @Entity()
 export class User {
@@ -33,6 +36,10 @@ export class User {
 
   @OneToMany(() => Phone, (phone) => phone.user, { onDelete: "CASCADE" })
   phones!: Phone[];
+
+  @OneToOne(() => Session, (session) => session.user, { onDelete: "CASCADE" })
+  @JoinColumn()
+  lastConnection!: Session;
 
   constructor() {
     this.id = uuid();
