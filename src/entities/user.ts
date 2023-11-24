@@ -39,7 +39,7 @@ export class User {
 
   @OneToOne(() => Session, (session) => session.user, { onDelete: "CASCADE" })
   @JoinColumn()
-  lastConnection!: Session;
+  session!: Session;
 
   constructor() {
     this.id = uuid();

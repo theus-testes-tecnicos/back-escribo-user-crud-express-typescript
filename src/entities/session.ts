@@ -22,7 +22,7 @@ export class Session {
   @Column({ type: "boolean", nullable: false, default: true })
   isActive!: boolean;
 
-  @OneToOne(() => User, (user) => user.lastConnection)
+  @OneToOne(() => User, (user) => user.session)
   @JoinColumn()
   user!: User;
 
