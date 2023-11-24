@@ -1,5 +1,4 @@
 import { Phone } from "../entities/phone";
-import { Session } from "../entities/session";
 
 import { IPhoneRequest } from "./phone";
 
@@ -11,7 +10,6 @@ export interface IUser {
   email: string;
   password: string;
   phones: Phone[];
-  session: Session;
 }
 
 export interface IUserRequest {
