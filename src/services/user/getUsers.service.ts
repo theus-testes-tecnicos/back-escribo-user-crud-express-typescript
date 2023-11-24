@@ -18,7 +18,7 @@ export const getUsersService = async (
     skip,
     take: limit,
     order: { createdAt: "desc" },
-    relations: { phones: true, session: true },
+    relations: { phones: true },
   });
 
   const next =
