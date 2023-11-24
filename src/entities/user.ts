@@ -24,14 +24,14 @@ export class User {
   @UpdateDateColumn()
   updatedAt!: Date;
 
-  @Column({ type: "string", nullable: false })
+  @Column({ nullable: false })
   name!: string;
 
-  @Column({ type: "string", nullable: false })
+  @Column({ nullable: false })
   email!: string;
 
   @Exclude()
-  @Column({ type: "string", nullable: false })
+  @Column({ nullable: false })
   password!: string;
 
   @OneToMany(() => Phone, (phone) => phone.user, { onDelete: "CASCADE" })

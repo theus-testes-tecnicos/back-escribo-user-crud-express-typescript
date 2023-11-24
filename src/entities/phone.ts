@@ -7,10 +7,10 @@ export class Phone {
   @PrimaryColumn("uuid")
   id: string;
 
-  @Column({ type: "string", nullable: false })
+  @Column({ nullable: false })
   ddd!: string;
 
-  @Column({ type: "string", nullable: false })
+  @Column({ nullable: false })
   phoneNumber!: string;
 
   @ManyToOne(() => User, { nullable: false, onDelete: "CASCADE" })
