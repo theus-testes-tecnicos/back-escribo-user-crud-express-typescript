@@ -4,9 +4,11 @@ import {
   PrimaryColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from "typeorm";
 import { Exclude } from "class-transformer";
 import { v4 as uuid } from "uuid";
+import { Phone } from "./phone";
 
 @Entity()
 export class User {
@@ -28,6 +30,9 @@ export class User {
   @Exclude()
   @Column({ type: "string", nullable: false })
   password!: string;
+
+  @OneToMany(() => Phone, (phone) => phone.user, { onDelete: "CASCADE" })
+  phones!: Phone[];
 
   constructor() {
     this.id = uuid();
