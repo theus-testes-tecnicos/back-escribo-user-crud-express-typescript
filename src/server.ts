@@ -1,6 +1,7 @@
+import "dotenv/config";
+
 import { app } from "./app";
 import { AppDataSource } from "./data-source";
-import "dotenv/config";
 
 const init = async () => {
   const SERVER_PORT = process.env.SERVER_PORT || 3001;
