@@ -7,8 +7,8 @@ export const getUsersController = async (req: Request, res: Response) => {
 
   const result = await getUsersService(
     req.baseUrl,
-    Number(page),
-    Number(limit)
+    Number(page) || 1,
+    Number(limit) || 5
   );
 
   return res.status(200).json(instanceToPlain(result));

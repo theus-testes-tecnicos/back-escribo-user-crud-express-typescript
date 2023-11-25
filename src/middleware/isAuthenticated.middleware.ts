@@ -30,6 +30,8 @@ export const isAuthenticatedMiddleware = async (
 
   jwt.verify(token, process.env.SECRET_KEY!, (err: any, decoded: any) => {
     if (err) {
+      console.log(err);
+
       throw new AppError(401, "invalid or expired token");
     }
 

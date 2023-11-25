@@ -4,13 +4,13 @@ import { UserSerializer } from "../../serializers/user.serializer";
 
 export const getUsersService = async (
   currentUrl: string,
-  limit: number = 5,
-  page: number = 1
+  page: number,
+  limit: number
 ) => {
   const userRepo = AppDataSource.getRepository(User);
   const count = await userRepo.count();
 
-  (page - 1) * limit > count || (page < 1 && (page = 1));
+  page < 1 || ((page - 1) * limit > count && (page = 1));
   limit < 1 && (limit = 5);
 
   const skip = (page - 1) * limit;
@@ -19,7 +19,6 @@ export const getUsersService = async (
     skip,
     take: limit,
     order: { createdAt: "desc" },
-    relations: { phones: true },
   });
 
   const next =

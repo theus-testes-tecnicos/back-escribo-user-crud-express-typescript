@@ -7,20 +7,20 @@ import { UserSerializer } from "../../serializers/user.serializer";
 
 export const loginService = async (email?: string, password?: string) => {
   if (!email || !password) {
-    throw new AppError(400, "email and senha fields are mandatory");
+    throw new AppError(400, "Campos email e senha são obrigatórios");
   }
 
   const userRepo = AppDataSource.getRepository(User);
   const user = await userRepo.findOneBy({ email });
 
   if (!user) {
-    throw new AppError(404, "invalid credentials");
+    throw new AppError(401, "Usuário e/ou senha inválidos");
   }
 
   const passwordMatch = compareSync(password, user.password);
 
   if (!passwordMatch) {
-    throw new AppError(404, "invalid credentials");
+    throw new AppError(401, "Usuário e/ou senha inválidos");
   }
 
   await userRepo.update(user.id, { lastLogin: new Date() });
