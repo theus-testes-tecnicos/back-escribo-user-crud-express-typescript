@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  database:
+    container_name: database
+    image: postgres:latest
+    env_file:
+      - .env
+    ports:
+      - <local-port>:<container-port> # <== Escolha as portas de acesso local e do container iguais as do arquivo .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_is_ready -U <username> -d <database>"] # <== informe o usuário do postgres e o database do arquivo .env
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    volumes:
+      - escribo:/var/lib/postgresql/data:rw
+
+volumes:
+  escribo:
+    external: true
