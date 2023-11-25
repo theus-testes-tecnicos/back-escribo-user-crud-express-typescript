@@ -19,7 +19,7 @@ export const createUserService = async ({
   const userAlreadyExists = await userRepo.findOneBy({ email });
 
   if (userAlreadyExists) {
-    throw new AppError(409, "user already exists");
+    throw new AppError(409, "E-mail já existente");
   }
 
   const password = hashSync(senha, 10);
@@ -28,15 +28,17 @@ export const createUserService = async ({
     email,
     password,
     name: nome,
-    lastLogin: Date.now(),
+    lastLogin: new Date(),
   });
+
+  console.log(newUser);
 
   await userRepo.save(newUser);
 
   const user = await userRepo.findOneBy({ email });
 
   if (!user) {
-    throw new AppError(501, "error when trying to save user");
+    throw new AppError(501, "Erro ao tentar salvar o usuário");
   }
 
   telefones.map(async (phone) => {

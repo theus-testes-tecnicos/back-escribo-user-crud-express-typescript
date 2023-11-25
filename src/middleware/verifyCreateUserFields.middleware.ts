@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { createUserSchema } from "../schemas/createUser.schema";
 import { AppError } from "../errors/AppError";
+import { ZodError } from "zod";
 
 export const verifyCreateUserFieldsMiddleware = async (
   req: Request,
@@ -12,7 +13,7 @@ export const verifyCreateUserFieldsMiddleware = async (
   if (!nome || !email || !senha || !telefones) {
     throw new AppError(
       400,
-      'The "nome", "email", "senha" and "telefones" fields are mandatory'
+      "The nome, email, senha and telefones fields are mandatory"
     );
   }
 
@@ -23,7 +24,12 @@ export const verifyCreateUserFieldsMiddleware = async (
 
     next();
   } catch (error) {
-    console.log("erro!");
-    console.log(error);
+    if (error instanceof ZodError) {
+      const errorMsg = error.errors.map((err) => err.message).join(". ");
+
+      throw new AppError(400, errorMsg);
+    } else {
+      throw new AppError(500, "internal server error");
+    }
   }
 };
