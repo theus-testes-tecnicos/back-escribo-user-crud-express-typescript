@@ -14,7 +14,7 @@ const dataSourceConfig = (): DataSourceOptions => {
 
   const nodeEnv: string | undefined = process.env.NODE_ENV;
 
-  if (nodeEnv === "migration" || nodeEnv === "dev") {
+  if (nodeEnv === "migration" || nodeEnv === "local") {
     return {
       type: "postgres",
       url: dbUrlMig,

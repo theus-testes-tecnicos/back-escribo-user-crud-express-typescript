@@ -7,29 +7,15 @@ services:
     env_file:
       - .env
     ports:
-      - 5050:5432
+      - <local-port>:<container-port> # <== Escolha as portas de acesso local e do container iguais as do arquivo .env
     healthcheck:
-      test: ["CMD-SHELL", "pg_is_ready -U theus -d escribo"]
+      test: ["CMD-SHELL", "pg_is_ready -U <username> -d <database>"] # <== informe o usuário do postgres e o database do arquivo .env
       interval: 10s
       timeout: 5s
       retries: 5
       start_period: 5s
     volumes:
       - escribo:/var/lib/postgresql/data:rw
-
-  # backend:
-  #   container_name: backend
-  #   build: ./
-  #   command: bash -c "npm run typeorm migration:run -- -d ./src/data-source.ts && npm run dev"
-  #   ports:
-  #     - 3001:3001
-  #   env_file:
-  #     - .env
-  #   depends_on:
-  #     - database
-  #   stdin_open: true
-  #   volumes:
-  #     - .:/usr/app
 
 volumes:
   escribo:
