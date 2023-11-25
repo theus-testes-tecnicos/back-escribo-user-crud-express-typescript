@@ -1,8 +1,8 @@
-import { Request, Response, NextFunction } from "express";
-import { AppError } from "../errors/AppError";
-import jwt, { TokenExpiredError } from "jsonwebtoken";
 import "dotenv/config";
-import { AppDataSource } from "../data-source";
+import { NextFunction, Request, Response } from "express";
+import jwt, { TokenExpiredError } from "jsonwebtoken";
+
+import { AppError } from "../errors/AppError";
 
 export const isAuthenticatedMiddleware = async (
   req: Request,

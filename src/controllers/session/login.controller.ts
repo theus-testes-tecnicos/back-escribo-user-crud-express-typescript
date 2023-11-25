@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+
 import { loginService } from "../../services/session/login.service";
 
 export const loginController = async (req: Request, res: Response) => {

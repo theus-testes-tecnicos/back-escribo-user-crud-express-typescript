@@ -1,11 +1,12 @@
 import { hashSync } from "bcrypt";
 import { AppDataSource } from "../../data-source";
+
 import { Phone } from "../../entities/phone";
 import { User } from "../../entities/user";
 import { AppError } from "../../errors/AppError";
 import { UserSerializer } from "../../serializers/user.serializer";
-import { IUserRequest } from "../../types/user";
 import { generateToken } from "../../utils/generateToken";
+import { IUserRequest } from "../../types/user";
 
 export const createUserService = async ({
   nome,

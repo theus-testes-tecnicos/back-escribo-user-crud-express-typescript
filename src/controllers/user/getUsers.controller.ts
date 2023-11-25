@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { instanceToPlain } from "class-transformer";
+
 import { getUsersService } from "../../services/user/getUsers.service";
 
 export const getUsersController = async (req: Request, res: Response) => {
@@ -11,5 +11,5 @@ export const getUsersController = async (req: Request, res: Response) => {
     Number(limit) || 5
   );
 
-  return res.status(200).json(instanceToPlain(result));
+  return res.status(200).json(result);
 };

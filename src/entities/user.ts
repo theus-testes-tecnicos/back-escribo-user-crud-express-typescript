@@ -6,8 +6,8 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from "typeorm";
-import { Exclude } from "class-transformer";
 import { v4 as uuid } from "uuid";
+
 import { Phone } from "./phone";
 
 @Entity()
@@ -30,7 +30,6 @@ export class User {
   @Column({ nullable: false })
   lastLogin!: Date;
 
-  @Exclude()
   @Column({ nullable: false })
   password!: string;
 

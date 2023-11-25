@@ -1,9 +1,10 @@
-import { AppDataSource } from "../../data-source";
-import { User } from "../../entities/user";
 import { compareSync } from "bcrypt";
+import { AppDataSource } from "../../data-source";
+
+import { User } from "../../entities/user";
 import { AppError } from "../../errors/AppError";
-import { generateToken } from "../../utils/generateToken";
 import { UserSerializer } from "../../serializers/user.serializer";
+import { generateToken } from "../../utils/generateToken";
 
 export const loginService = async (email?: string, password?: string) => {
   if (!email || !password) {
