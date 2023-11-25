@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "../errors/AppError";
-import jwt from "jsonwebtoken";
+import jwt, { TokenExpiredError } from "jsonwebtoken";
 import "dotenv/config";
 import { AppDataSource } from "../data-source";
 
@@ -16,23 +16,20 @@ export const isAuthenticatedMiddleware = async (
   }
 
   const tokenArr = authorization.split(" ");
-  let token: string;
-
-  if (tokenArr.length > 1) {
-    if (tokenArr[0].toLowerCase() !== "bearer") {
-      throw new AppError(400, "authentication token must be of type bearer");
-    }
-
-    token = tokenArr[1];
-  } else {
-    token = tokenArr[0];
+  0;
+  if (tokenArr.length < 2 || tokenArr[0].toLowerCase() !== "bearer") {
+    throw new AppError(400, "Token inválido, deve ser do tipo Bearer");
   }
 
-  jwt.verify(token, process.env.SECRET_KEY!, (err: any, decoded: any) => {
-    if (err) {
-      console.log(err);
+  const token: string = tokenArr[1];
 
-      throw new AppError(401, "invalid or expired token");
+  jwt.verify(token, process.env.SECRET_KEY!, (err: any, decoded: any) => {
+    if (err instanceof TokenExpiredError) {
+      throw new AppError(401, "Sessão inválida");
+    }
+
+    if (err) {
+      throw new AppError(401, "Não autorizado");
     }
 
     req.userId = decoded.userId;
