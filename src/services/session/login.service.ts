@@ -23,6 +23,8 @@ export const loginService = async (email?: string, password?: string) => {
     throw new AppError(404, "invalid credentials");
   }
 
+  await userRepo.update(user.id, { lastLogin: Date.now() });
+
   const token = generateToken({ userId: user.id });
 
   const response = new UserSerializer(user, token);
