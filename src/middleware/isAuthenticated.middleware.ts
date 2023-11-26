@@ -12,7 +12,7 @@ export const isAuthenticatedMiddleware = async (
   const { authorization } = req.headers;
 
   if (!authorization) {
-    throw new AppError(401, "missing authorization token");
+    throw new AppError(401, "Token de autorização ausente");
   }
 
   const tokenArr = authorization.split(" ");

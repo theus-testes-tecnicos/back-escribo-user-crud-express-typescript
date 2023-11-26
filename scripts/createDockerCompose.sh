@@ -1,3 +1,8 @@
+#!/bin/bash
+
+ARQUIVO_DOCKER_COMPOSE="docker-compose.yml"
+
+cat <<EOF > "$ARQUIVO_DOCKER_COMPOSE"
 version: "3.9"
 
 services:
@@ -7,9 +12,9 @@ services:
     env_file:
       - .env
     ports:
-      - <local-port>:<container-port> # <== Escolha as portas de acesso local e do container iguais as do arquivo .env
+      - 5050:5432
     healthcheck:
-      test: ["CMD-SHELL", "pg_is_ready -U <username> -d <database>"] # <== informe o usuário do postgres e o database do arquivo .env
+      test: ["CMD-SHELL", "pg_is_ready -U escribo -d escribo"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -20,3 +25,7 @@ services:
 volumes:
   escribo:
     external: true
+EOF
+
+echo "Arquivo $ARQUIVO_DOCKER_COMPOSE criado com sucesso."
+

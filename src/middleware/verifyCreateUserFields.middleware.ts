@@ -13,7 +13,7 @@ export const verifyCreateUserFieldsMiddleware = async (
   if (!nome || !email || !senha || !telefones) {
     throw new AppError(
       400,
-      "The nome, email, senha and telefones fields are mandatory"
+      "Os campos nome, email, senha e telefones são obrigatórios"
     );
   }
 
