@@ -8,11 +8,16 @@ const dddRegex = /^\d{2}$/;
 const phoneNumberRegex = /^\d{8,9}$/;
 
 const phoneSchema = z.object({
-  ddd: z.string().refine((value) => dddRegex.test(value), "invalid ddd format"),
+  ddd: z
+    .string()
+    .refine((value) => dddRegex.test(value), "Formato ddd inválido"),
 
   numero: z
     .string()
-    .refine((value) => phoneNumberRegex.test(value), "invalid numero format"),
+    .refine(
+      (value) => phoneNumberRegex.test(value),
+      "Formato de número inválido"
+    ),
 });
 
 export const createUserSchema = z.object({
@@ -20,21 +25,21 @@ export const createUserSchema = z.object({
     .string()
     .refine(
       (value) => typeof value === "string",
-      "value of nome must be string"
+      "Campo nome deve ser uma string"
     ),
 
   email: z
     .string()
-    .refine((value) => emailRegex.test(value), "invalid email format"),
+    .refine((value) => emailRegex.test(value), "Formato de email inválido"),
 
   senha: z
     .string()
     .refine(
       (value) => passwordRegex.test(value),
-      "the senha field must contain at least one number, one uppercase letter, one lowercase letter, one special character and at least 8 characters"
+      "O campo senha deve conter ao menos 1 letra maiúscula, 1 minúscula, 1 número, 1 caractere especial e no mínimo 8 caracteres"
     ),
 
   telefones: z
     .array(phoneSchema)
-    .min(1, "specify at least one telephone number"),
+    .min(1, "Especifique ao menos 1 número de telefone"),
 });
