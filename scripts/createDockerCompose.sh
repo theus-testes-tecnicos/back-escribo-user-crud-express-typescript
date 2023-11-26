@@ -1,3 +1,8 @@
+#!/bin/bash
+
+ARQUIVO_DOCKER_COMPOSE="docker-compose.yml"
+
+cat <<EOF > "$ARQUIVO_DOCKER_COMPOSE"
 version: "3.9"
 
 services:
@@ -20,3 +25,7 @@ services:
 volumes:
   escribo:
     external: true
+EOF
+
+echo "Arquivo $ARQUIVO_DOCKER_COMPOSE criado com sucesso."
+
