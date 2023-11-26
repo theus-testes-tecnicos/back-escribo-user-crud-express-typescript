@@ -25,6 +25,8 @@ Falaremos sobre cada um logo mais.
 
 Para este projeto, foram utilizadas as seguintes tecnologias:
 
+### Desenvolvimento
+
 - [NodeJS](https://nodejs.org/en/)
 - [Express](https://expressjs.com/pt-br/)
 - [TypeScript](https://www.typescriptlang.org/)
@@ -32,6 +34,13 @@ Para este projeto, foram utilizadas as seguintes tecnologias:
 - [TypeORM](https://typeorm.io/)
 - [Zod](https://zod.dev/)
 - [Docker](https://www.docker.com/)
+
+### Acompanhamento de rotas
+
+ - [Insomnia](https://insomnia.rest/download)
+
+### Deploy
+ - [Render](https://render.com/)
 
 <br/>
 
@@ -48,7 +57,7 @@ URL de base para a aplicação em que foi feito o deploy:
 
 [ Topo ](#conteúdo)
 
-Antes de executar de fato o programa, você precisará se certificar de que possui o [Node.JS](https://nodejs.org/en/) e o [Docker](https://www.docker.com/) instalado na sua máquina. São as duas ferramentas que são obrigatórias para execução local desta aplicação, seja em desenvolvimento ou pra teste de produção local.
+Antes de executar de fato o programa, você precisará se certificar de que possui o [Node.JS](https://nodejs.org/en/) e o [Docker](https://www.docker.com/) instalado na sua máquina. São as duas ferramentas que são obrigatórias para execução local desta aplicação, seja em desenvolvimento ou pra teste de produção local. Além disso precisará de um Client de API como o [Insomnia](https://insomnia.rest/download) ou [Postman](https://www.postman.com/), para testar as rotas.
 
 * Após clonar o projeto para a sua máquina local, abra um terminal na raiz do projeto clonado e habilite o script de inicialização do projeto(NÃO USE O POWERSHELL do windows, aconselho usar o git bash):
 
@@ -78,6 +87,16 @@ este token é gerado automaticamente quando o usuário faz o login ou se cadastr
 ## 4. Endpoints
 
 [ Topo ](#conteúdo)
+
+Em caso de acesso a uma rota que não esteja configurada, o cliente receberá um json de erro da seguinte maneira:
+
+```json
+{
+	"status": "error",
+	"codigo": 404,
+	"mensagem": "Rota não encontrada"
+}
+```
 
 ### Índice
 
