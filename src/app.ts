@@ -4,6 +4,7 @@ import cors from "cors";
 
 import { handleErrorMiddleware } from "./errors/HandleError";
 import { routes } from "./routes";
+import { AppError } from "./errors/AppError";
 
 export const app = express();
 
@@ -15,5 +16,9 @@ app.get("", (req: Request, res: Response) => {
 });
 
 routes(app);
+
+app.use((req: Request, res: Response) => {
+  throw new AppError(404, "Rota não encontrada");
+});
 
 app.use(handleErrorMiddleware);
